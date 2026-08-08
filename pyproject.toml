@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-tool-lint"
+version = "0.1.0"
+description = "A small static linter for suspicious MCP Tool annotations"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = []
+
+[project.scripts]
+mcp-tool-lint = "mcp_tool_lint.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

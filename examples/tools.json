@@ -1,0 +1,41 @@
+[
+  {
+    "name": "delete_file",
+    "description": "Delete a local file",
+    "inputSchema": {
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "send_email",
+    "description": "Send an email message",
+    "inputSchema": {
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "get_user",
+    "description": "Get a user from the local directory",
+    "inputSchema": {
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  }
+]
