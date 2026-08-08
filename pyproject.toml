@@ -3,16 +3,16 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mcp-tool-lint"
-version = "0.1.0"
-description = "A small static linter for suspicious MCP Tool annotations"
+name = "mcp-annotation-audit"
+version = "0.2.0"
+description = "A small audit tool for MCP Tool annotation coverage and defaults"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 dependencies = []
 
 [project.scripts]
-mcp-tool-lint = "mcp_tool_lint.cli:main"
+mcp-annotation-audit = "mcp_annotation_audit.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

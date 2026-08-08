@@ -1,0 +1,345 @@
+[
+  {
+    "tool": "API-get-user",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-get-users",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-get-self",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-post-search",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-post-search",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-post-search",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-get-block-children",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-patch-block-children",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-patch-block-children",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-patch-block-children",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-retrieve-a-block",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-update-a-block",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-update-a-block",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-update-a-block",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-delete-a-block",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-delete-a-block",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-delete-a-block",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-retrieve-a-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-patch-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-patch-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-patch-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-post-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-post-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-post-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-retrieve-a-page-property",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-retrieve-a-comment",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-create-a-comment",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-create-a-comment",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-create-a-comment",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-query-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-query-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-query-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-retrieve-a-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-update-a-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-update-a-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-update-a-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-create-a-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-create-a-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-create-a-data-source",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-list-data-source-templates",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-retrieve-a-database",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-move-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-move-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-move-page",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-retrieve-page-markdown",
+    "rule_id": "MCP001",
+    "severity": "WARN",
+    "message": "Potential annotation mismatch: tool text may conflict with effective readOnlyHint=true. Review recommended.",
+    "evidence": "description contains \"...est 403: The integration lacks the read/update content capability required for this page. 404: Page not found or not sha...\""
+  },
+  {
+    "tool": "API-retrieve-page-markdown",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "API-update-page-markdown",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "API-update-page-markdown",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "API-update-page-markdown",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  }
+]

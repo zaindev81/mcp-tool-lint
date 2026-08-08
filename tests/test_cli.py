@@ -13,14 +13,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SRC_ROOT = PROJECT_ROOT / "src"
 
 
-SAFE_ANNOTATIONS = {
-    "readOnlyHint": True,
-    "destructiveHint": False,
-    "idempotentHint": True,
-    "openWorldHint": False,
-}
-
-
 class CliTests(unittest.TestCase):
     def run_cli(
         self,
@@ -29,7 +21,6 @@ class CliTests(unittest.TestCase):
         raw: str | None = None,
         raw_bytes: bytes | None = None,
         extra_arguments: tuple[str, ...] = (),
-        environment_overrides: dict[str, str] | None = None,
     ) -> subprocess.CompletedProcess[str]:
         with tempfile.TemporaryDirectory() as directory:
             input_path = Path(directory) / "tools.json"
@@ -42,18 +33,13 @@ class CliTests(unittest.TestCase):
             environment = os.environ.copy()
             existing_pythonpath = environment.get("PYTHONPATH")
             environment["PYTHONPATH"] = os.pathsep.join(
-                part
-                for part in (str(SRC_ROOT), existing_pythonpath)
-                if part
+                part for part in (str(SRC_ROOT), existing_pythonpath) if part
             )
-            if environment_overrides:
-                environment.update(environment_overrides)
-
             return subprocess.run(
                 [
                     sys.executable,
                     "-m",
-                    "mcp_tool_lint.cli",
+                    "mcp_annotation_audit.cli",
                     str(input_path),
                     *extra_arguments,
                 ],
@@ -64,138 +50,53 @@ class CliTests(unittest.TestCase):
                 check=False,
             )
 
-    def test_human_output_groups_review_candidates_and_clean_tools(self) -> None:
+    def test_human_output_reports_coverage_defaults_applicability_and_review(self) -> None:
         result = self.run_cli(
             [
                 {
-                    "name": "delete_file",
-                    "description": "Delete a local file",
+                    "name": "read_local",
                     "annotations": {
                         "readOnlyHint": True,
-                        "destructiveHint": False,
-                        "idempotentHint": False,
                         "openWorldHint": False,
                     },
                 },
                 {
-                    "name": "send_email",
-                    "description": "Send an email",
+                    "name": "write_local",
                     "annotations": {
                         "readOnlyHint": False,
-                        "destructiveHint": True,
-                        "idempotentHint": True,
-                        "openWorldHint": True,
+                        "destructiveHint": False,
                     },
                 },
-                {
-                    "name": "get_user",
-                    "description": "Get a user from local memory",
-                    "annotations": SAFE_ANNOTATIONS,
-                },
+                {"name": "unannotated"},
             ]
         )
 
         self.assertEqual(0, result.returncode)
         self.assertEqual("", result.stderr)
-        self.assertIn("△ delete_file", result.stdout)
-        self.assertNotIn("HIGH", result.stdout)
-        self.assertIn("MCP001", result.stdout)
-        self.assertNotIn("MCP002", result.stdout)
-        self.assertIn("△ send_email", result.stdout)
-        self.assertIn("WARN", result.stdout)
-        self.assertIn("MCP003", result.stdout)
-        self.assertIn("Review recommended", result.stdout)
-        self.assertIn("✓ get_user", result.stdout)
-        self.assertIn("OK", result.stdout)
-
-    def test_human_output_uses_ascii_markers_when_stdout_is_ascii(self) -> None:
-        result = self.run_cli(
-            [
-                {
-                    "name": "delete_file",
-                    "description": "Delete a local file",
-                    "annotations": {
-                        "readOnlyHint": True,
-                        "destructiveHint": True,
-                        "idempotentHint": False,
-                        "openWorldHint": True,
-                    },
-                },
-                {
-                    "name": "send_email",
-                    "description": "Send an email",
-                    "annotations": {
-                        "readOnlyHint": False,
-                        "destructiveHint": True,
-                        "idempotentHint": True,
-                        "openWorldHint": True,
-                    },
-                },
-                {"name": "lookup_user"},
-                {
-                    "name": "get_user",
-                    "description": "Get a user from local memory",
-                    "annotations": SAFE_ANNOTATIONS,
-                },
-            ],
-            environment_overrides={"PYTHONIOENCODING": "ascii"},
+        self.assertIn("Applicable annotation coverage: 4/10 (40.0%)", result.stdout)
+        self.assertIn("Tools with manual review fields: 2", result.stdout)
+        self.assertIn("not detected errors or vulnerabilities", result.stdout)
+        self.assertIn("readOnlyHint: true (explicit; applicable)", result.stdout)
+        self.assertIn(
+            "destructiveHint: true (MCP default; not applicable while effective readOnlyHint=true)",
+            result.stdout,
         )
+        self.assertIn(
+            "idempotentHint: false (MCP default; applicable; manual review field)",
+            result.stdout,
+        )
+        self.assertIn(
+            "Manual review fields: idempotentHint, openWorldHint", result.stdout
+        )
+        for old_term in ("MCP001", "MCP002", "MCP003", "MCP004", "WARN", "HIGH"):
+            self.assertNotIn(old_term, result.stdout)
 
-        self.assertEqual(0, result.returncode)
-        self.assertEqual("", result.stderr)
-        self.assertIn("! delete_file", result.stdout)
-        self.assertIn("! send_email", result.stdout)
-        self.assertIn("i lookup_user", result.stdout)
-        self.assertIn("+ get_user", result.stdout)
-        for marker in ("✗", "△", "ⓘ", "✓"):
-            self.assertNotIn(marker, result.stdout)
-        self.assertFalse(result.stdout.startswith("x "))
-        self.assertNotIn("\nx ", result.stdout)
-
-    def test_non_ascii_evidence_is_escaped_for_ascii_stdout(self) -> None:
-        data = [
-            {
-                "name": "delete_resume",
-                "description": "Delete résumé",
-                "annotations": {
-                    "readOnlyHint": True,
-                    "destructiveHint": True,
-                    "idempotentHint": False,
-                    "openWorldHint": True,
-                },
-            }
-        ]
-
-        for extra_arguments in ((), ("--json",)):
-            with self.subTest(arguments=extra_arguments):
-                result = self.run_cli(
-                    data,
-                    extra_arguments=extra_arguments,
-                    environment_overrides={"PYTHONIOENCODING": "ascii"},
-                )
-
-                self.assertEqual(0, result.returncode)
-                self.assertEqual("", result.stderr)
-                result.stdout.encode("ascii")
-                output = (
-                    json.loads(result.stdout)[0]["evidence"]
-                    if extra_arguments
-                    else result.stdout
-                )
-                self.assertIn(r"r\u00e9sum\u00e9", output)
-
-    def test_json_output_has_required_shape_and_stable_order(self) -> None:
+    def test_json_output_has_stable_research_shape(self) -> None:
         result = self.run_cli(
             [
                 {
-                    "name": "delete_send_email",
-                    "description": "Delete a record and send email",
-                    "annotations": {
-                        "readOnlyHint": True,
-                        "destructiveHint": False,
-                        "idempotentHint": True,
-                        "openWorldHint": False,
-                    },
+                    "name": "read_local",
+                    "annotations": {"readOnlyHint": True},
                 }
             ],
             extra_arguments=("--json",),
@@ -203,86 +104,46 @@ class CliTests(unittest.TestCase):
 
         self.assertEqual(0, result.returncode)
         self.assertEqual("", result.stderr)
-        findings = json.loads(result.stdout)
+        report = json.loads(result.stdout)
+        self.assertEqual(1, report["report_schema_version"])
+        self.assertEqual("2025-11-25", report["mcp_schema_version"])
+        self.assertEqual(2, report["summary"]["applicable_fields"])
+        self.assertEqual(1, report["summary"]["explicit_applicable_fields"])
+        self.assertEqual(50.0, report["summary"]["coverage_percent"])
+        tool = report["tools"][0]
+        self.assertEqual(["openWorldHint"], tool["manual_review"]["fields"])
         self.assertEqual(
-            ["MCP001", "MCP004"],
-            [finding["rule_id"] for finding in findings],
+            {
+                "value": True,
+                "source": "mcp_default",
+                "explicit": False,
+                "applicable": False,
+                "manual_review": False,
+            },
+            tool["annotations"]["destructiveHint"],
         )
-        for finding in findings:
-            self.assertEqual(
-                {"tool", "rule_id", "severity", "message", "evidence"},
-                set(finding),
-            )
-            self.assertEqual("delete_send_email", finding["tool"])
-            self.assertTrue(finding["message"])
-            self.assertTrue(finding["evidence"])
 
-    def test_clean_result_exits_zero(self) -> None:
-        result = self.run_cli(
-            [
-                {
-                    "name": "get_user",
-                    "description": "Get a user from local memory",
-                    "annotations": SAFE_ANNOTATIONS,
-                }
-            ]
-        )
+    def test_omitted_annotations_do_not_fail_the_audit(self) -> None:
+        result = self.run_cli([{"name": "delete_send_remote"}])
 
         self.assertEqual(0, result.returncode)
         self.assertEqual("", result.stderr)
-        self.assertIn("✓ get_user", result.stdout)
+        self.assertIn("Applicable annotation coverage: 0/4 (0.0%)", result.stdout)
+        self.assertNotIn("Potential annotation mismatch", result.stdout)
 
-    def test_warn_only_result_exits_zero(self) -> None:
-        result = self.run_cli(
-            [
-                {
-                    "name": "send_email",
-                    "description": "Send an email",
-                    "annotations": {
-                        "readOnlyHint": False,
-                        "destructiveHint": True,
-                        "idempotentHint": True,
-                        "openWorldHint": True,
-                    },
-                }
-            ]
+    def test_invalid_inputs_exit_two_and_write_only_to_stderr(self) -> None:
+        cases = (
+            {"raw": '[{"name": "broken"}'},
+            {"raw_bytes": b'[{"name": "\xff"}]'},
+            {"data": {"name": "not-an-array"}},
+            {"data": [{"name": "bad", "annotations": {"readOnlyHint": 1}}]},
         )
-
-        self.assertEqual(0, result.returncode)
-        self.assertEqual("", result.stderr)
-        self.assertIn("△ send_email", result.stdout)
-        self.assertIn("MCP003", result.stdout)
-
-    def test_info_only_result_exits_zero(self) -> None:
-        result = self.run_cli(
-            [{"name": "get_user", "description": "Get a user"}]
-        )
-
-        self.assertEqual(0, result.returncode)
-        self.assertEqual("", result.stderr)
-        self.assertIn("ⓘ get_user", result.stdout)
-        self.assertEqual(4, result.stdout.count("MCP005"))
-
-    def test_invalid_json_exits_two_and_writes_diagnostic_to_stderr(self) -> None:
-        result = self.run_cli(raw='[{"name": "broken"}')
-
-        self.assertEqual(2, result.returncode)
-        self.assertEqual("", result.stdout)
-        self.assertTrue(result.stderr.strip())
-
-    def test_invalid_utf8_exits_two_and_writes_diagnostic_to_stderr(self) -> None:
-        result = self.run_cli(raw_bytes=b'[{"name": "\xff"}]')
-
-        self.assertEqual(2, result.returncode)
-        self.assertEqual("", result.stdout)
-        self.assertTrue(result.stderr.strip())
-
-    def test_invalid_input_shape_exits_two(self) -> None:
-        result = self.run_cli({"name": "not-an-array"})
-
-        self.assertEqual(2, result.returncode)
-        self.assertEqual("", result.stdout)
-        self.assertTrue(result.stderr.strip())
+        for case in cases:
+            with self.subTest(case=case):
+                result = self.run_cli(**case)
+                self.assertEqual(2, result.returncode)
+                self.assertEqual("", result.stdout)
+                self.assertIn("mcp-annotation-audit: error:", result.stderr)
 
     def test_missing_file_exits_two(self) -> None:
         environment = os.environ.copy()
@@ -294,8 +155,8 @@ class CliTests(unittest.TestCase):
             [
                 sys.executable,
                 "-m",
-                "mcp_tool_lint.cli",
-                "/definitely/not/a/real/mcp-tool-lint-input.json",
+                "mcp_annotation_audit.cli",
+                "/definitely/not/a/real/audit-input.json",
             ],
             cwd=PROJECT_ROOT,
             env=environment,
@@ -306,16 +167,13 @@ class CliTests(unittest.TestCase):
 
         self.assertEqual(2, result.returncode)
         self.assertEqual("", result.stdout)
-        self.assertTrue(result.stderr.strip())
+        self.assertIn("mcp-annotation-audit: error:", result.stderr)
 
-    def test_missing_required_path_is_a_usage_error(self) -> None:
+    def test_missing_path_is_a_usage_error_with_new_command_name(self) -> None:
         environment = os.environ.copy()
-        existing_pythonpath = environment.get("PYTHONPATH")
-        environment["PYTHONPATH"] = os.pathsep.join(
-            part for part in (str(SRC_ROOT), existing_pythonpath) if part
-        )
+        environment["PYTHONPATH"] = str(SRC_ROOT)
         result = subprocess.run(
-            [sys.executable, "-m", "mcp_tool_lint.cli"],
+            [sys.executable, "-m", "mcp_annotation_audit.cli"],
             cwd=PROJECT_ROOT,
             env=environment,
             capture_output=True,
@@ -325,7 +183,7 @@ class CliTests(unittest.TestCase):
 
         self.assertEqual(2, result.returncode)
         self.assertEqual("", result.stdout)
-        self.assertTrue(result.stderr.strip())
+        self.assertIn("usage: mcp-annotation-audit", result.stderr)
 
 
 if __name__ == "__main__":

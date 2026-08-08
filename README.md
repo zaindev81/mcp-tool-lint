@@ -1,30 +1,47 @@
-# mcp-tool-lint
+# mcp-annotation-audit
 
-`mcp-tool-lint` is a small proof-of-concept static linter for annotations on
-[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) Tool
-definitions. It reads tools from JSON and reports annotation values that look
-inconsistent with a tool's name or description.
+`mcp-annotation-audit` is a small proof-of-concept developer tool for inspecting
+coverage of the four boolean behavioral annotations on
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) Tools. It shows
+which values are explicit, which come from MCP defaults, which fields are
+applicable, and which omitted applicable fields may benefit from human review.
 
-## Problem
+It does not infer Tool behavior or decide whether an annotation is correct.
+An omitted annotation is not reported as an error or vulnerability.
 
-MCP Tool annotations communicate properties such as whether a tool is
-read-only, destructive, idempotent, or able to interact with the wider world.
-An omitted or misleading annotation can cause a client or a user to make an
-unsafe assumption about a tool.
+## Why this project pivoted
 
-## Hypothesis
+This repository began as `mcp-tool-lint`, a keyword-based static linter. Its
+first research experiment analyzed 267 Tools and produced 16 semantic review
+candidates: 0 true positives, 0 likely true positives, 14 false positives, and
+2 inconclusive results. That is strong negative evidence for the heuristic and
+it has been removed rather than tuned.
 
-MCP server developers may incorrectly configure or omit Tool annotations, and
-a small deterministic linter can identify potentially dangerous or misleading
-configurations before runtime.
+A separate pre-registered source audit examined 40 omitted applicable fields:
+26 defaults were correct, 11 were conservative but materially imprecise, none
+were wrong, and 3 were inconclusive. That result supports investigating a
+coverage and annotation-quality aid, not a vulnerability detector.
 
-This project is intentionally a narrow PoC. It does not run tools or use an
-LLM; it only compares annotations with keywords in tool names and descriptions.
+The original reports and data remain unchanged under [`research/pilot`](research/pilot)
+and [`research/omitted_annotations_pilot`](research/omitted_annotations_pilot).
+
+## Pivot boundary
+
+- **Retained:** JSON input, strict validation of the supported booleans,
+  explicit/effective value separation, MCP defaults, applicability rules, and
+  dependency-free operation.
+- **Removed:** keyword matching, semantic mismatch rules, severities, evidence
+  excerpts, and finding-based exit status.
+- **Historical only:** the `mcp-tool-lint` command and `MCP001`–`MCP005` finding
+  schema remain reproducible from the pinned research commit but are not
+  supported aliases in this PoC.
+- **Renamed:** the product, distribution, command, and Python namespace now use
+  `mcp-annotation-audit`; omitted applicable fields are called manual review
+  fields rather than findings.
 
 ## Installation
 
-Python 3.10 or newer is required. From a clone of this repository, install the
-package in editable mode:
+Python 3.10 or newer is required. From a clone of this repository:
 
 ```bash
 python3 -m venv .venv
@@ -34,101 +51,84 @@ python -m pip install -e .
 
 ## Usage
 
-Lint a JSON array of MCP-compatible Tool definitions:
+Audit a JSON array of MCP-compatible Tool definitions:
 
 ```bash
-mcp-tool-lint examples/tools.json
+mcp-annotation-audit examples/tools.json
 ```
 
-Request machine-readable findings:
+Request a versioned, machine-readable report:
 
 ```bash
-mcp-tool-lint examples/tools.json --json
+mcp-annotation-audit examples/tools.json --json
 ```
 
-The command exits with status `1` when it finds any `HIGH` findings, `0`
-otherwise, and `2` for invalid input or command usage. The current keyword
-rules produce `WARN` review candidates, not `HIGH` findings, so a keyword match
-alone does not fail the command.
-Status symbols fall back to `x`, `!`, `i`, and `+` when stdout cannot encode
-the Unicode markers.
+The command exits with status `0` after any valid audit, regardless of coverage,
+and `2` for invalid input or command usage.
 
-Example findings include:
+The human report includes aggregate and per-annotation coverage followed by
+per-Tool details. A defaulted applicable field is labeled as a manual review
+field; this means only that source inspection may determine whether an explicit
+value would improve precision.
 
-```text
-△ delete_file
-  WARN [MCP001]: Potential annotation mismatch: tool text may conflict with effective readOnlyHint=true. Review recommended. (evidence: description contains "Delete a local file")
+## Defaults and applicability
 
-△ send_email
-  WARN [MCP003]: Potential annotation mismatch: tool text may conflict with effective idempotentHint=true. Review recommended. (evidence: description contains "Send an email message")
+The PoC is pinned to the
+[MCP `2025-11-25` ToolAnnotations schema](https://modelcontextprotocol.io/specification/2025-11-25/schema#toolannotations):
 
-✓ get_user
-  OK
-```
+| Annotation | Default when omitted | Applicability |
+|---|---:|---|
+| `readOnlyHint` | `false` | All Tools |
+| `destructiveHint` | `true` | Meaningful when effective `readOnlyHint` is `false` |
+| `idempotentHint` | `false` | Meaningful when effective `readOnlyHint` is `false` |
+| `openWorldHint` | `true` | All Tools |
 
-JSON output is an array of findings with stable rule IDs and evidence:
+Coverage is `explicit applicable fields / applicable fields`. An explicit
+`destructiveHint` or `idempotentHint` remains visible when a Tool is effectively
+read-only, but it is excluded from the coverage numerator and denominator.
 
-```json
-[
-  {
-    "tool": "delete_file",
-    "rule_id": "MCP001",
-    "severity": "WARN",
-    "message": "Potential annotation mismatch: tool text may conflict with effective readOnlyHint=true. Review recommended.",
-    "evidence": "description contains \"Delete a local file\""
-  }
-]
-```
+The JSON report records:
 
-The supported annotations are `readOnlyHint`, `destructiveHint`,
-`idempotentHint`, and `openWorldHint`. Explicit values are preserved separately
-from effective values. When omitted, the MCP defaults are:
+- the report schema and MCP schema versions;
+- aggregate Tool and field counts;
+- aggregate coverage for each annotation;
+- every effective value, its `explicit` or `mcp_default` source, and its
+  applicability; and
+- per-Tool fields suggested for manual review solely because they are omitted
+  and applicable.
 
-- `readOnlyHint=false`
-- `destructiveHint=true`
-- `idempotentHint=false`
-- `openWorldHint=true`
+## Input scope
 
-MCP005 reports applicable omissions as annotation coverage information and
-includes the effective default; it does not describe them as vulnerabilities.
-`destructiveHint` and `idempotentHint` are evaluated and reported for coverage
-only when effective `readOnlyHint` is false.
+The input must be a non-empty top-level JSON array. Each item needs a non-blank
+string `name`; `annotations`, when present, must be an object. Explicit values
+for the four supported hints must be JSON booleans. Other Tool fields and
+annotation keys are ignored because this is not a full MCP schema validator.
+
+## Non-goals
+
+- Keyword or LLM-based semantic inference
+- Automatic annotation values, recommendations, ranking, or auto-fix
+- Correctness, risk, severity, or vulnerability classification
+- Source-code analysis or MCP runtime interception
+- Live server discovery or JSON-RPC envelope support
+- A web UI, database, cloud service, GitHub Action, or plugin system
+- Coverage of `title`, proposed annotations, or fields outside the four boolean
+  behavioral hints
 
 ## Tests
 
-Run the standard-library test suite without installing additional test
-dependencies:
+Run the standard-library test suite without installing extra dependencies:
 
 ```bash
-python -m unittest discover -s tests
+python3 -m unittest discover -s tests
 ```
 
-## Current limitations
+## Current evidence gap
 
-- Rules use case-insensitive keyword matching with a few common inflections;
-  they do not understand intent, negation, synonyms, or domain context.
-- A matching word can be harmless in context, so findings may be false
-  positives and require human review.
-- Unrecognized wording, irregular inflections, and behavior omitted from the
-  tool text can produce false negatives.
-- The input must be a top-level JSON array; JSON-RPC `tools/list` envelopes,
-  live MCP servers, and standard input are not supported.
-- This is an annotation consistency check, not a security scanner or proof that
-  a tool is safe.
-
-## Research / Validation
-
-The next step is to run the linter against real open-source MCP servers and
-measure:
-
-- number of tools analyzed
-- missing annotations
-- suspicious annotations
-- confirmed annotation mistakes
-- false-positive rate
-
-Those results should determine whether the rules are useful enough to refine or
-whether the hypothesis should be rejected before expanding the project.
+The source audit shows that some omitted defaults are materially imprecise. It
+does not yet show that developers understand this report, find the review list
+actionable, or improve annotations because of it. It also does not estimate
+ecosystem-wide prevalence.
 
 ## License
 

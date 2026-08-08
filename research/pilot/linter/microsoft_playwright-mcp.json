@@ -1,0 +1,177 @@
+[
+  {
+    "tool": "browser_close",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_resize",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_resume",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_hide_highlight",
+    "rule_id": "MCP001",
+    "severity": "WARN",
+    "message": "Potential annotation mismatch: tool text may conflict with effective readOnlyHint=true. Review recommended.",
+    "evidence": "description contains \"Remove a highlight overlay previously added for the element.\""
+  },
+  {
+    "tool": "browser_handle_dialog",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_evaluate",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_file_upload",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_drop",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_fill_form",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_press_key",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_type",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_mouse_move_xy",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_mouse_click_xy",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_mouse_drag_xy",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_mouse_down",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_mouse_up",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_mouse_wheel",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_navigate",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_navigate_back",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_run_code_unsafe",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_click",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_drag",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_hover",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_select_option",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "browser_tabs",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  }
+]

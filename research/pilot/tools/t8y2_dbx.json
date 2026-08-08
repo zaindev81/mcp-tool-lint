@@ -1,0 +1,74 @@
+[
+  {
+    "name": "dbx_list_connections",
+    "description": "List database connections configured in DBX. Returns connection IDs, names, database types, endpoints, and selected databases.",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:234"
+  },
+  {
+    "name": "dbx_list_tables",
+    "description": "List tables and views for a database connection",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:252"
+  },
+  {
+    "name": "dbx_describe_table",
+    "description": "Get column definitions for a table",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:286"
+  },
+  {
+    "name": "dbx_execute_query",
+    "description": "Execute a SQL query on a database connection (max 100 rows returned)",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:307"
+  },
+  {
+    "name": "dbx_open_session",
+    "description": "Open a stateful query session pinned to a single backend connection. Returns a session ID for dbx_execute_query: USE, SET CATALOG, session variables and temporary tables persist across calls within the session. Close with dbx_close_session when done; idle sessions expire after 30 minutes.",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:395"
+  },
+  {
+    "name": "dbx_close_session",
+    "description": "Close a stateful query session and release its pinned backend connection",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:426"
+  },
+  {
+    "name": "dbx_execute_redis_command",
+    "description": "Execute a Redis command on a Redis connection",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:455"
+  },
+  {
+    "name": "dbx_get_schema_context",
+    "description": "Get compact table and column context for writing SQL",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:524"
+  },
+  {
+    "name": "dbx_add_connection",
+    "description": "Add a new database connection to DBX",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:572"
+  },
+  {
+    "name": "dbx_remove_connection",
+    "description": "Remove a database connection from DBX",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:620"
+  },
+  {
+    "name": "dbx_open_table",
+    "description": "Open a table in DBX desktop app. Requires DBX to be running.",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:662"
+  },
+  {
+    "name": "dbx_execute_and_show",
+    "description": "Execute a SQL query in DBX desktop app UI and show results there. Requires DBX to be running.",
+    "annotations": {},
+    "_source": "crates/dbx-mcp/src/server.rs:696"
+  }
+]

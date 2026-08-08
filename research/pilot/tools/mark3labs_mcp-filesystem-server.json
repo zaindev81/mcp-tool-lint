@@ -1,0 +1,86 @@
+[
+  {
+    "name": "read_file",
+    "description": "Read the complete contents of a file from the file system.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:32"
+  },
+  {
+    "name": "write_file",
+    "description": "Create a new file or overwrite an existing file with new content.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:41"
+  },
+  {
+    "name": "list_directory",
+    "description": "Get a detailed listing of all files and directories in a specified path.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:54"
+  },
+  {
+    "name": "create_directory",
+    "description": "Create a new directory or ensure a directory exists.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:63"
+  },
+  {
+    "name": "copy_file",
+    "description": "Copy files and directories.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:72"
+  },
+  {
+    "name": "move_file",
+    "description": "Move or rename files and directories.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:85"
+  },
+  {
+    "name": "search_files",
+    "description": "Recursively search for files and directories matching a pattern.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:98"
+  },
+  {
+    "name": "get_file_info",
+    "description": "Retrieve detailed metadata about a file or directory.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:111"
+  },
+  {
+    "name": "list_allowed_directories",
+    "description": "Returns the list of directories that this server is allowed to access.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:120"
+  },
+  {
+    "name": "read_multiple_files",
+    "description": "Read the contents of multiple files in a single operation.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:125"
+  },
+  {
+    "name": "tree",
+    "description": "Returns a hierarchical JSON representation of a directory structure.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:135"
+  },
+  {
+    "name": "delete_file",
+    "description": "Delete a file or directory from the file system.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:150"
+  },
+  {
+    "name": "modify_file",
+    "description": "Update file by finding and replacing text. Provides a simple pattern matching interface without needing exact character positions.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:162"
+  },
+  {
+    "name": "search_within_files",
+    "description": "Search for text within file contents. Unlike search_files which only searches file names, this tool scans the actual contents of text files for matching substrings. Binary files are automatically excluded from the search. Reports file paths and line numbers where matches are found.",
+    "annotations": {},
+    "_source": "filesystemserver/server.go:185"
+  }
+]

@@ -1,0 +1,176 @@
+[
+  {
+    "name": "conversations_history",
+    "description": "Get messages from the channel (or DM) by channel_id, the last row/column in the response is used as 'cursor' parameter for pagination if not empty",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:130"
+  },
+  {
+    "name": "conversations_replies",
+    "description": "Get a thread of messages posted to a conversation by channelID and thread_ts, the last row/column in the response is used as 'cursor' parameter for pagination if not empty",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:153"
+  },
+  {
+    "name": "conversations_add_message",
+    "description": "Add a message to a public channel, private channel, or direct message (DM, or IM) conversation by channel_id and thread_ts.",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:180"
+  },
+  {
+    "name": "reactions_add",
+    "description": "Add an emoji reaction to a message in a public channel, private channel, or direct message (DM, or IM) conversation.",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:205"
+  },
+  {
+    "name": "reactions_remove",
+    "description": "Remove an emoji reaction from a message in a public channel, private channel, or direct message (DM, or IM) conversation.",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:224"
+  },
+  {
+    "name": "attachment_get_data",
+    "description": "Download an attachment's content by file ID. Returns file metadata and content (text files as-is, binary files as base64). Maximum file size is 5MB.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:243"
+  },
+  {
+    "name": "conversations_search_messages",
+    "description": "Search messages in a public channel, private channel, or direct message (DM, or IM) conversation using filters. All filters are optional, if not provided then search_query is required.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:254"
+  },
+  {
+    "name": "users_search",
+    "description": "Search for users by name, email, display name, or Slack user ID. If a Slack user ID is provided (e.g. U07VCEPP4N5), the user is looked up directly. Returns user details and DM channel ID if available.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:303"
+  },
+  {
+    "name": "conversations_unreads",
+    "description": "Get unread messages across all channels. With browser session tokens (xoxc/xoxd), uses a single API call for complete results. With OAuth user tokens (xoxp), scans a subset of channels per type (limited by max_channels) — results may be partial on large workspaces. Results are prioritized: DMs > group DMs > partner channels > internal channels.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:321"
+  },
+  {
+    "name": "conversations_mark",
+    "description": "Mark a channel or DM as read. If no timestamp is provided, marks all messages as read.",
+    "annotations": {
+      "destructiveHint": false
+    },
+    "_source": "pkg/server/server.go:354"
+  },
+  {
+    "name": "conversations_leave",
+    "description": "Leave a channel, group conversation, or DM. Cannot leave the #general channel.",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:369"
+  },
+  {
+    "name": "conversations_join",
+    "description": "Join a public channel. Use channels_list or channels_me to find channel IDs.",
+    "annotations": {
+      "idempotentHint": true
+    },
+    "_source": "pkg/server/server.go:381"
+  },
+  {
+    "name": "channels_list",
+    "description": "Get list of channels",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:395"
+  },
+  {
+    "name": "channels_me",
+    "description": "List channels you are a member of. Unlike channels_list which returns all workspace channels, this returns only channels you have joined. Useful on large workspaces where channels_list returns thousands of results.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:424"
+  },
+  {
+    "name": "usergroups_list",
+    "description": "List all user groups (subteams) in the Slack workspace. User groups are mention groups like @engineering or @design that notify all members. Use this to discover available groups, check group membership counts, or find a group's ID before joining/updating it. Returns CSV with columns: id, name, handle, description, user_count, is_external.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:443"
+  },
+  {
+    "name": "usergroups_me",
+    "description": "Manage your own user group membership. Use action='list' to see which groups you belong to. Use action='join' with a usergroup_id to add yourself to a group (e.g., to receive @mentions). Use action='leave' with a usergroup_id to remove yourself. This is the easiest way to join/leave groups without needing to know the full member list.",
+    "annotations": {},
+    "_source": "pkg/server/server.go:463"
+  },
+  {
+    "name": "usergroups_create",
+    "description": "Create a new user group (mention group) in the Slack workspace. After creation, use usergroups_users_update to add members, or users can join themselves with usergroups_me. The handle becomes the @mention (e.g., handle='engineering' creates @engineering).",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:477"
+  },
+  {
+    "name": "usergroups_update",
+    "description": "Update a user group's metadata: name, handle (@mention), description, or default channels. Does NOT change members - use usergroups_users_update for that. At least one field must be provided.",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:498"
+  },
+  {
+    "name": "usergroups_users_update",
+    "description": "Replace all members of a user group with a new list. WARNING: This completely replaces the member list - any user not in the 'users' parameter will be removed. To add/remove just yourself, use usergroups_me instead. To add a single user without removing others, first get current members from usergroups_list with include_users=true, then call this with the combined list.",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:522"
+  },
+  {
+    "name": "saved_list",
+    "description": "List saved items from Slack's 'Save for Later' panel. Returns items the user has saved, with optional message content. Replaces the deprecated stars.list API. Requires browser session tokens (xoxc/xoxd).",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "pkg/server/server.go:541"
+  },
+  {
+    "name": "saved_update",
+    "description": "Update a saved item: mark as completed, set a due date, or both. Use item_id and ts values from saved_list output. Replaces the deprecated stars.add/stars.remove APIs.",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:564"
+  },
+  {
+    "name": "saved_clear_completed",
+    "description": "Clear all completed saved items from the 'Save for Later' panel. This is a bulk operation that removes all items with state='completed'.",
+    "annotations": {
+      "destructiveHint": true
+    },
+    "_source": "pkg/server/server.go:586"
+  }
+]

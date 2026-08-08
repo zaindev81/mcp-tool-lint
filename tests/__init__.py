@@ -1,1 +1,1 @@
-"""Tests for mcp-tool-lint."""
+"""Tests for mcp-annotation-audit."""

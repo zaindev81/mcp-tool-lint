@@ -1,0 +1,338 @@
+[
+  {
+    "tool": "dbx_list_connections",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_list_connections",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_list_connections",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_list_connections",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_list_tables",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_list_tables",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_list_tables",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_list_tables",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_describe_table",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_describe_table",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_describe_table",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_describe_table",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_execute_query",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_execute_query",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_execute_query",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_execute_query",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_open_session",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_open_session",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_open_session",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_open_session",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_close_session",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_close_session",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_close_session",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_close_session",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_execute_redis_command",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_execute_redis_command",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_execute_redis_command",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_execute_redis_command",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_get_schema_context",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_get_schema_context",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_get_schema_context",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_get_schema_context",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_add_connection",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_add_connection",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_add_connection",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_add_connection",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_remove_connection",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_remove_connection",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_remove_connection",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_remove_connection",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_open_table",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_open_table",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_open_table",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_open_table",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_execute_and_show",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'readOnlyHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"readOnlyHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_execute_and_show",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'destructiveHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"destructiveHint\"; effective value is true"
+  },
+  {
+    "tool": "dbx_execute_and_show",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'idempotentHint' was not explicitly specified; its effective MCP default is false.",
+    "evidence": "annotations omit \"idempotentHint\"; effective value is false"
+  },
+  {
+    "tool": "dbx_execute_and_show",
+    "rule_id": "MCP005",
+    "severity": "INFO",
+    "message": "Annotation coverage: 'openWorldHint' was not explicitly specified; its effective MCP default is true.",
+    "evidence": "annotations omit \"openWorldHint\"; effective value is true"
+  }
+]

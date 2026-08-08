@@ -1,4 +1,4 @@
-"""Load and minimally validate MCP Tool definitions from JSON."""
+"""Load the Tool metadata needed for an annotation audit from JSON."""
 
 from __future__ import annotations
 
@@ -9,11 +9,11 @@ from .models import SUPPORTED_HINTS, ToolDefinition
 
 
 class ToolInputError(ValueError):
-    """Raised when an input file is unreadable or has an invalid shape."""
+    """Raised when an input file is unreadable or has an invalid supported shape."""
 
 
 def parse_tools_data(data: object) -> list[ToolDefinition]:
-    """Validate decoded JSON and return the fields used by the linter."""
+    """Validate decoded JSON and retain only fields used by the audit."""
 
     if not isinstance(data, list):
         raise ToolInputError("input must be a JSON array of tool definitions")
@@ -32,10 +32,6 @@ def _parse_tool(item: object, index: int) -> ToolDefinition:
     if not isinstance(name, str) or not name.strip():
         raise ToolInputError(f"{location} must have a non-blank string name")
 
-    description = item.get("description", "")
-    if not isinstance(description, str):
-        raise ToolInputError(f"{location} description must be a string")
-
     raw_annotations = item.get("annotations", {})
     if not isinstance(raw_annotations, dict):
         raise ToolInputError(f"{location} annotations must be a JSON object")
@@ -49,15 +45,11 @@ def _parse_tool(item: object, index: int) -> ToolDefinition:
             raise ToolInputError(f"{location} annotation {hint} must be a boolean")
         annotations[hint] = value
 
-    return ToolDefinition(
-        name=name,
-        description=description,
-        annotations=annotations,
-    )
+    return ToolDefinition(name=name, annotations=annotations)
 
 
 def load_tools(path: str | Path) -> list[ToolDefinition]:
-    """Read a UTF-8 JSON file and parse its tool definitions."""
+    """Read a UTF-8 JSON file and parse its Tool definitions."""
 
     input_path = Path(path)
     try:
@@ -67,7 +59,9 @@ def load_tools(path: str | Path) -> list[ToolDefinition]:
             f"invalid UTF-8 in {input_path} at byte {exc.start}"
         ) from exc
     except OSError as exc:
-        raise ToolInputError(f"cannot read {input_path}: {exc.strerror or exc}") from exc
+        raise ToolInputError(
+            f"cannot read {input_path}: {exc.strerror or exc}"
+        ) from exc
 
     try:
         data = json.loads(contents)

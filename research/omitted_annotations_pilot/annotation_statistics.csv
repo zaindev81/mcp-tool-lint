@@ -1,0 +1,5 @@
+annotation_type,sampled,conclusive,correct_count,correct_pct_all,conservative_imprecise_count,conservative_imprecise_pct_all,wrong_count,wrong_pct_all,inconclusive_count,inconclusive_pct_all,supportive_count,supportive_pct_all,supportive_pct_conclusive
+readOnlyHint,10,10,8,80.0,2,20.0,0,0.0,0,0.0,2,20.0,20.0
+destructiveHint,10,10,6,60.0,4,40.0,0,0.0,0,0.0,4,40.0,40.0
+idempotentHint,10,7,3,30.0,4,40.0,0,0.0,3,30.0,4,40.0,57.1429
+openWorldHint,10,10,9,90.0,1,10.0,0,0.0,0,0.0,1,10.0,10.0

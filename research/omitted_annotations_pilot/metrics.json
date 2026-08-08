@@ -1,0 +1,66 @@
+{
+  "experiment": "omitted-annotations-v1",
+  "sample_size": 40,
+  "conclusive_count": 37,
+  "evaluable": true,
+  "classification_metrics_all_sampled": {
+    "CORRECT": {
+      "count": 26,
+      "percentage": 65.0
+    },
+    "CONSERVATIVE_IMPRECISE": {
+      "count": 11,
+      "percentage": 27.5
+    },
+    "WRONG": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "INCONCLUSIVE": {
+      "count": 3,
+      "percentage": 7.5
+    }
+  },
+  "classification_metrics_conclusive_only": {
+    "CORRECT": {
+      "count": 26,
+      "percentage": 70.2703
+    },
+    "CONSERVATIVE_IMPRECISE": {
+      "count": 11,
+      "percentage": 29.7297
+    },
+    "WRONG": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "INCONCLUSIVE": {
+      "count": 0,
+      "percentage": 0.0
+    }
+  },
+  "supportive": {
+    "definition": "CONSERVATIVE_IMPRECISE + WRONG",
+    "count": 11,
+    "percentage_all_sampled": 27.5,
+    "percentage_conclusive": 29.7297,
+    "repository_count": 5,
+    "repositories": [
+      "KnockOutEZ/wigolo",
+      "github/github-mcp-server",
+      "korotovsky/slack-mcp-server",
+      "mark3labs/mcp-filesystem-server",
+      "modelcontextprotocol/servers"
+    ],
+    "annotation_type_count": 4,
+    "annotation_types": [
+      "destructiveHint",
+      "idempotentHint",
+      "openWorldHint",
+      "readOnlyHint"
+    ]
+  },
+  "decision": "SUPPORTED",
+  "recommended_next_action": "pivot toward annotation coverage/quality tooling",
+  "scope_note": "Descriptive 40-case pilot; no population-level inference."
+}

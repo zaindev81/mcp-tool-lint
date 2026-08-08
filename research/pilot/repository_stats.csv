@@ -1,0 +1,11 @@
+repository,extraction_status,tools_analyzed,tools_with_annotations,tools_with_no_annotations,tools_missing_annotations,tools_with_full_applicable_coverage,applicable_annotation_slots,explicitly_covered_applicable_slots,warnings,high_findings,coverage_items,true_positives,likely_true_positives,false_positives,inconclusive
+mark3labs/mcp-filesystem-server,ANALYZED,14,0,14,14,0,56,0,0,0,56,0,0,0,0
+prest/prest,INCONCLUSIVE_REPOSITORY,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+github/github-mcp-server,ANALYZED,85,85,0,85,0,232,92,4,0,140,0,0,2,2
+microsoft/playwright-mcp,ANALYZED,42,42,0,24,18,132,108,1,0,24,0,0,1,0
+KnockOutEZ/wigolo,ANALYZED,10,0,10,10,0,40,0,0,0,40,0,0,0,0
+korotovsky/slack-mcp-server,ANALYZED,22,21,1,22,0,68,21,1,0,47,0,0,1,0
+awslabs/mcp,INCONCLUSIVE_REPOSITORY,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+makenotion/notion-mcp-server,ANALYZED,24,24,0,24,0,72,24,1,0,48,0,0,1,0
+t8y2/dbx,ANALYZED,12,0,12,12,0,48,0,0,0,48,0,0,0,0
+modelcontextprotocol/servers,ANALYZED,58,57,1,1,57,166,162,9,0,4,0,0,9,0

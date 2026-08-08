@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 import sys
 import tempfile
-from pathlib import Path
 import unittest
 
 
@@ -12,174 +12,112 @@ SRC_ROOT = PROJECT_ROOT / "src"
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
-from mcp_tool_lint.models import ANNOTATION_DEFAULTS
-from mcp_tool_lint.parser import load_tools, parse_tools_data
+from mcp_annotation_audit.parser import ToolInputError, load_tools, parse_tools_data
 
 
-class ParseToolsDataTests(unittest.TestCase):
-    def test_parses_minimal_tool(self) -> None:
-        tools = parse_tools_data([{"name": "get_user"}])
-
-        self.assertEqual(1, len(tools))
-        self.assertEqual("get_user", tools[0].name)
-        self.assertEqual("", tools[0].description)
-        self.assertEqual({}, tools[0].annotations)
-        self.assertEqual(ANNOTATION_DEFAULTS, tools[0].effective_annotations)
-
-    def test_parses_full_tool_and_ignores_unneeded_mcp_fields(self) -> None:
+class ParseToolsTests(unittest.TestCase):
+    def test_parses_explicit_supported_annotations_only(self) -> None:
         tools = parse_tools_data(
             [
                 {
-                    "name": "delete_file",
-                    "title": "Delete file",
-                    "description": "Delete a local file",
-                    "inputSchema": {"type": "object"},
+                    "name": "lookup",
+                    "description": "Any description",
                     "annotations": {
-                        "readOnlyHint": False,
-                        "destructiveHint": True,
+                        "title": "Lookup",
+                        "readOnlyHint": True,
+                        "destructiveHint": False,
                         "idempotentHint": True,
                         "openWorldHint": False,
-                        "futureHint": "ignored",
+                        "futureHint": True,
                     },
-                    "futureToolField": {"allowed": True},
                 }
             ]
         )
 
-        self.assertEqual(1, len(tools))
-        tool = tools[0]
-        self.assertEqual("delete_file", tool.name)
-        self.assertEqual("Delete a local file", tool.description)
-        for annotation, expected in {
-            "readOnlyHint": False,
-            "destructiveHint": True,
-            "idempotentHint": True,
-            "openWorldHint": False,
-        }.items():
-            self.assertEqual(expected, tool.annotations[annotation])
-
-    def test_keeps_explicit_annotations_separate_from_effective_defaults(self) -> None:
-        tool = parse_tools_data(
-            [{"name": "get_user", "annotations": {"readOnlyHint": True}}]
-        )[0]
-
-        self.assertEqual({"readOnlyHint": True}, tool.annotations)
+        self.assertEqual("lookup", tools[0].name)
         self.assertEqual(
             {
                 "readOnlyHint": True,
-                "destructiveHint": True,
-                "idempotentHint": False,
-                "openWorldHint": True,
+                "destructiveHint": False,
+                "idempotentHint": True,
+                "openWorldHint": False,
             },
-            tool.effective_annotations,
+            tools[0].annotations,
         )
 
-    def test_parses_multiple_tools_in_input_order(self) -> None:
+    def test_description_is_not_read_or_validated(self) -> None:
         tools = parse_tools_data(
             [
-                {"name": "first"},
-                {"name": "second", "description": "Second tool"},
+                {"name": "first", "description": 123},
+                {"name": "second", "description": "delete send web"},
             ]
         )
 
         self.assertEqual(["first", "second"], [tool.name for tool in tools])
+        self.assertEqual([{}, {}], [tool.annotations for tool in tools])
 
-    def test_rejects_empty_or_non_array_root(self) -> None:
-        for data in ([], {}, "not an array", None, 42):
-            with self.subTest(data=data), self.assertRaises(ValueError):
+    def test_rejects_non_array_and_empty_input(self) -> None:
+        for data in ({"name": "lookup"}, [], None):
+            with self.subTest(data=data), self.assertRaises(ToolInputError):
                 parse_tools_data(data)
 
-    def test_rejects_non_object_items(self) -> None:
-        for item in (None, "tool", 1, [], True):
-            with self.subTest(item=item), self.assertRaises(ValueError):
+    def test_rejects_invalid_tool_and_name_shapes(self) -> None:
+        for item in ("lookup", {}, {"name": ""}, {"name": "   "}, {"name": 1}):
+            with self.subTest(item=item), self.assertRaises(ToolInputError):
                 parse_tools_data([item])
 
-    def test_rejects_missing_blank_or_non_string_names(self) -> None:
-        invalid_tools = (
-            {},
-            {"name": ""},
-            {"name": "   "},
-            {"name": None},
-            {"name": 123},
-        )
-
-        for tool in invalid_tools:
-            with self.subTest(tool=tool), self.assertRaises(ValueError):
-                parse_tools_data([tool])
-
-    def test_rejects_non_string_description(self) -> None:
-        for description in (None, 1, {}, []):
-            with self.subTest(description=description), self.assertRaises(ValueError):
-                parse_tools_data([{"name": "get_user", "description": description}])
-
     def test_rejects_non_object_annotations(self) -> None:
-        for annotations in (None, "readonly", [], True):
-            with self.subTest(annotations=annotations), self.assertRaises(ValueError):
-                parse_tools_data([{"name": "get_user", "annotations": annotations}])
+        for annotations in (None, [], "read-only"):
+            with self.subTest(annotations=annotations), self.assertRaises(
+                ToolInputError
+            ):
+                parse_tools_data([{"name": "lookup", "annotations": annotations}])
 
-    def test_rejects_non_boolean_supported_annotations(self) -> None:
-        annotation_names = (
-            "readOnlyHint",
-            "destructiveHint",
-            "idempotentHint",
-            "openWorldHint",
-        )
-        invalid_values = (None, 0, 1, "true", [], {})
-
-        for annotation in annotation_names:
-            for value in invalid_values:
-                with (
-                    self.subTest(annotation=annotation, value=value),
-                    self.assertRaises(ValueError),
-                ):
-                    parse_tools_data(
-                        [{"name": "get_user", "annotations": {annotation: value}}]
-                    )
+    def test_rejects_non_boolean_supported_values(self) -> None:
+        for value in (None, 0, 1, "true", []):
+            with self.subTest(value=value), self.assertRaises(ToolInputError):
+                parse_tools_data(
+                    [
+                        {
+                            "name": "lookup",
+                            "annotations": {"readOnlyHint": value},
+                        }
+                    ]
+                )
 
 
 class LoadToolsTests(unittest.TestCase):
-    def write_temp_file(self, contents: str) -> Path:
-        temporary_file = tempfile.NamedTemporaryFile(
-            mode="w",
-            encoding="utf-8",
-            suffix=".json",
-            delete=False,
-        )
-        with temporary_file:
-            temporary_file.write(contents)
-        self.addCleanup(Path(temporary_file.name).unlink, missing_ok=True)
-        return Path(temporary_file.name)
+    def test_loads_utf8_json_file(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "tools.json"
+            path.write_text(
+                json.dumps([{"name": "検索", "annotations": {}}]),
+                encoding="utf-8",
+            )
 
-    def test_loads_json_file(self) -> None:
-        path = self.write_temp_file(
-            json.dumps([{"name": "get_user", "description": "Get a user"}])
-        )
+            tools = load_tools(path)
 
-        tools = load_tools(path)
+        self.assertEqual("検索", tools[0].name)
 
-        self.assertEqual(["get_user"], [tool.name for tool in tools])
+    def test_invalid_json_reports_location(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "tools.json"
+            path.write_text('[{"name": "broken"}', encoding="utf-8")
 
-    def test_rejects_malformed_json(self) -> None:
-        path = self.write_temp_file('[{"name": "broken"}')
+            with self.assertRaisesRegex(ToolInputError, r"line 1, column"):
+                load_tools(path)
 
-        with self.assertRaises(ValueError):
-            load_tools(path)
+    def test_invalid_utf8_reports_byte(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "tools.json"
+            path.write_bytes(b'[{"name":"\xff"}]')
 
-    def test_rejects_invalid_utf8(self) -> None:
-        temporary_file = tempfile.NamedTemporaryFile(suffix=".json", delete=False)
-        with temporary_file:
-            temporary_file.write(b'[{"name": "\xff"}]')
-        path = Path(temporary_file.name)
-        self.addCleanup(path.unlink, missing_ok=True)
+            with self.assertRaisesRegex(ToolInputError, r"byte"):
+                load_tools(path)
 
-        with self.assertRaises(ValueError):
-            load_tools(path)
-
-    def test_missing_file_is_an_error(self) -> None:
-        path = Path(tempfile.gettempdir()) / "mcp-tool-lint-file-does-not-exist.json"
-
-        with self.assertRaises((OSError, ValueError)):
-            load_tools(path)
+    def test_missing_file_is_input_error(self) -> None:
+        with self.assertRaisesRegex(ToolInputError, r"cannot read"):
+            load_tools("/definitely/not/a/real/audit-input.json")
 
 
 if __name__ == "__main__":

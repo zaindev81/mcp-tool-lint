@@ -1,0 +1,689 @@
+[
+  {
+    "name": "actions_get",
+    "description": "Get details about specific GitHub Actions resources.\nUse this tool to get details about individual workflows, workflow runs, jobs, and artifacts by their unique IDs.\n",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "actions_list",
+    "description": "Tools for listing GitHub Actions resources.\nUse this tool to list workflows in a repository, or list workflow runs, jobs, and artifacts for a specific workflow or workflow run.\n",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "actions_run_trigger",
+    "description": "Trigger GitHub Actions workflow operations, including running, re-running, cancelling workflow runs, and deleting workflow run logs.",
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "add_comment_to_pending_review",
+    "description": "Add review comment to the requester's latest pending pull request review. A pending review needs to already exist to call this (check with the user if not sure).",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "add_issue_comment",
+    "description": "Add a comment and/or reaction to a specific issue or issue comment in a GitHub repository. Use this tool with pull requests as well (in this case pass pull request number as issue_number), but only if user is not asking specifically to add or react to review comments. At least one of body or reaction is required.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "add_reply_to_pull_request_comment",
+    "description": "Add a reply and/or reaction to an existing pull request comment. This can create a new comment linked as a reply to the specified comment, add an emoji reaction to the specified comment, or do both. At least one of body or reaction is required.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "assign_copilot_to_issue",
+    "description": "Assign Copilot to a specific issue in a GitHub repository.\n\nThis tool can help with the following outcomes:\n- a Pull Request created with source code changes to resolve the issue\n\n\nMore information can be found at:\n- https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent\n",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "assign_copilot_to_issue_with_intent",
+    "description": "Assign Copilot to a specific issue in a GitHub repository. Prefer this tool over assign_copilot_to_issue when available.\n\nThis tool can help with the following outcomes:\n- a Pull Request created with source code changes to resolve the issue\n\n\nMore information can be found at:\n- https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent\n",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "create_branch",
+    "description": "Create a new branch in a GitHub repository",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "create_gist",
+    "description": "Create a new gist",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "create_or_update_file",
+    "description": "Create or update a single file in a GitHub repository. \nIf updating, you should provide the SHA of the file you want to update. Use this tool to create or update a file in a GitHub repository remotely; do not use it for local file operations.\n\nIn order to obtain the SHA of original file version before updating, use the following git command:\ngit rev-parse <branch>:<path to file>\n\nSHA MUST be provided for existing file updates.\n",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "create_pull_request",
+    "description": "Create a new pull request in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "create_repository",
+    "description": "Create a new GitHub repository in your account or specified organization",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "delete_file",
+    "description": "Delete a file from a GitHub repository",
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "discussion_comment_write",
+    "description": "Write operations for discussion comments.\nSupports adding top-level comments, replying to existing comments, updating comment content, deleting comments, and marking or unmarking comments as the answer.",
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "dismiss_notification",
+    "description": "Dismiss a notification by marking it as read or done",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "fork_repository",
+    "description": "Fork a GitHub repository to your account or specified organization",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_code_quality_finding",
+    "description": "Get details of a specific code quality finding in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_code_scanning_alert",
+    "description": "Get details of a specific code scanning alert in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_commit",
+    "description": "Get details for a commit from a GitHub repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_dependabot_alert",
+    "description": "Get details of a specific dependabot alert in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_discussion",
+    "description": "Get a specific discussion by ID",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_discussion_comments",
+    "description": "Get comments from a discussion",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_file_contents",
+    "description": "Get the contents of a file or directory from a GitHub repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_gist",
+    "description": "Get gist content of a particular gist, by gist ID",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_global_security_advisory",
+    "description": "Get a global security advisory",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_job_logs",
+    "description": "Get logs for GitHub Actions workflow jobs.\nUse this tool to retrieve logs for a specific job or all failed jobs in a workflow run.\nFor single job logs, provide job_id. For all failed jobs in a run, provide run_id with failed_only=true.\n",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_label",
+    "description": "Get a specific label from a repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_latest_release",
+    "description": "Get the latest release in a GitHub repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_me",
+    "description": "Get details of the authenticated GitHub user. Use this when a request is about the user's own profile for GitHub. Or when information is missing to build other tool calls.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_notification_details",
+    "description": "Get detailed information for a specific GitHub notification, always call this tool when the user asks for details about a specific notification, if you don't know the ID list notifications first.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_release_by_tag",
+    "description": "Get a specific release by its tag name in a GitHub repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_repository_tree",
+    "description": "Get the tree structure (files and directories) of a GitHub repository at a specific ref or SHA",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_secret_scanning_alert",
+    "description": "Get details of a specific secret scanning alert in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_tag",
+    "description": "Get details about a specific git tag in a GitHub repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_team_members",
+    "description": "Get member usernames of a specific team in an organization. Limited to organizations accessible with current credentials",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "get_teams",
+    "description": "Get details of the teams the user is a member of. Limited to organizations accessible with current credentials",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "issue_read",
+    "description": "Get information about a specific issue in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "issue_write",
+    "description": "Create a new or update an existing issue in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "label_write",
+    "description": "Perform write operations on repository labels. To set labels on issues, use the 'update_issue' tool.",
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_branches",
+    "description": "List branches in a GitHub repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_code_scanning_alerts",
+    "description": "List code scanning alerts in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_commits",
+    "description": "Get list of commits of a branch in a GitHub repository. Returns at least 30 results per page by default, but can return more if specified using the perPage parameter (up to 100).",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_dependabot_alerts",
+    "description": "List dependabot alerts in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_discussion_categories",
+    "description": "List discussion categories with their id and name, for a repository or organisation.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_discussions",
+    "description": "List discussions for a repository or organisation.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_gists",
+    "description": "List gists for a user",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_global_security_advisories",
+    "description": "List global security advisories from GitHub.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_issue_fields",
+    "description": "List issue fields for a repository or organization. Returns field definitions including name, type (text, number, date, single_select), and for single_select fields the list of valid option names. When repo is omitted, returns org-level fields directly.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_issue_types",
+    "description": "List supported issue types for a repository or its owner organization. When repo is omitted, returns org-level issue types directly.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_issues",
+    "description": "List issues in a GitHub repository. For pagination, use the 'endCursor' from the previous response's 'pageInfo' in the 'after' parameter.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_label",
+    "description": "List labels from a repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_notifications",
+    "description": "Lists all GitHub notifications for the authenticated user, including unread notifications, mentions, review requests, assignments, and updates on issues or pull requests. Use this tool whenever the user asks what to work on next, requests a summary of their GitHub activity, wants to see pending reviews, or needs to check for new updates or tasks. This tool is the primary way to discover actionable items, reminders, and outstanding work on GitHub. Always call this tool when asked what to work on next, what is pending, or what needs attention in GitHub.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_org_repository_security_advisories",
+    "description": "List repository security advisories for a GitHub organization.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_pull_requests",
+    "description": "List pull requests in a GitHub repository. If the user specifies an author, then DO NOT use this tool and use the search_pull_requests tool instead.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_releases",
+    "description": "List releases in a GitHub repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_repository_collaborators",
+    "description": "List collaborators of a GitHub repository. Results are paginated; the response includes `nextPage`, `prevPage`, `firstPage`, and `lastPage` fields. To get the next page, use the `nextPage` value as the `page` parameter.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_repository_security_advisories",
+    "description": "List repository security advisories for a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_secret_scanning_alerts",
+    "description": "List secret scanning alerts in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_starred_repositories",
+    "description": "List starred repositories",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "list_tags",
+    "description": "List git tags in a GitHub repository",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "manage_notification_subscription",
+    "description": "Manage a notification subscription: ignore, watch, or delete a notification thread subscription.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "manage_repository_notification_subscription",
+    "description": "Manage a repository notification subscription: ignore, watch, or delete repository notifications subscription for the provided repository.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "mark_all_notifications_read",
+    "description": "Mark all notifications as read",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "merge_pull_request",
+    "description": "Merge a pull request in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "projects_get",
+    "description": "Get details about specific GitHub Projects resources.\nUse this tool to get details about individual projects, project fields, and project items by their unique IDs.\n",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "projects_list",
+    "description": "Tools for listing GitHub Projects resources.\nUse this tool to list projects for a user or organization, or list project fields and items for a specific project.\n",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "projects_write",
+    "description": "Create and manage GitHub Projects: create projects, add/update/delete items, bulk-update many items at once, create status updates, and add iteration fields.",
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "pull_request_read",
+    "description": "Get information on a specific pull request in GitHub repository.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "pull_request_review_write",
+    "description": "Create and/or submit, delete review of a pull request.\n\nAvailable methods:\n- create: Create a new review of a pull request. If \"event\" parameter is provided, the review is submitted. If \"event\" is omitted, a pending review is created.\n- submit_pending: Submit an existing pending review of a pull request. This requires that a pending review exists for the current user on the specified pull request. The \"body\" and \"event\" parameters are used when submitting the review.\n- delete_pending: Delete an existing pending review of a pull request. This requires that a pending review exists for the current user on the specified pull request.\n- resolve_thread: Resolve a review thread. Requires only \"threadId\" parameter with the thread's node ID (e.g., PRRT_kwDOxxx). The owner, repo, and pullNumber parameters are not used for this method. Resolving an already-resolved thread is a no-op.\n- unresolve_thread: Unresolve a previously resolved review thread. Requires only \"threadId\" parameter. The owner, repo, and pullNumber parameters are not used for this method. Unresolving an already-unresolved thread is a no-op.\n",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "push_files",
+    "description": "Push multiple files to a GitHub repository in a single commit",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "request_copilot_review",
+    "description": "Request a GitHub Copilot code review for a pull request. Use this for automated feedback on pull requests, usually before requesting a human reviewer.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "search_code",
+    "description": "Fast and precise code search across ALL GitHub repositories using GitHub's native search engine. Best for finding exact symbols, functions, classes, or specific code patterns.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "search_commits",
+    "description": "Search for commits across GitHub repositories using GitHub's commit search syntax. Useful for finding specific changes, authors, or messages across one or many repositories. Searches the default branch only.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "search_issues",
+    "description": "Search issues using natural-language semantic matching. Best for conceptual or paraphrased queries (e.g. \"login fails after password reset\"). Already scoped to is:issue.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "search_orgs",
+    "description": "Find GitHub organizations by name, location, or other organization metadata. Ideal for discovering companies, open source foundations, or teams.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "search_pull_requests",
+    "description": "Search for pull requests in GitHub repositories using issues search syntax already scoped to is:pr",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "search_repositories",
+    "description": "Find GitHub repositories by name, description, readme, topics, or other metadata. Perfect for discovering projects, finding examples, or locating specific repositories across GitHub.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "search_users",
+    "description": "Find GitHub users by username, real name, or other profile information. Useful for locating developers, contributors, or team members.",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "star_repository",
+    "description": "Star a GitHub repository",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "sub_issue_write",
+    "description": "Add a sub-issue to a parent issue in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "unstar_repository",
+    "description": "Unstar a GitHub repository",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "update_gist",
+    "description": "Update an existing gist",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "update_pull_request",
+    "description": "Update an existing pull request in a GitHub repository.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  },
+  {
+    "name": "update_pull_request_branch",
+    "description": "Update the branch of a pull request with the latest changes from the base branch.",
+    "annotations": {
+      "readOnlyHint": false
+    },
+    "_source": "tools/list with --toolsets=all; explicitness checked against pkg/github source literals"
+  }
+]
