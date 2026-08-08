@@ -25,7 +25,7 @@ _STATUS_MARKERS = {
 def _argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mcp-tool-lint",
-        description="Report suspicious or missing MCP Tool annotations.",
+        description="Report MCP Tool annotation coverage and potential mismatches.",
     )
     parser.add_argument("input", type=Path, help="JSON file containing MCP Tool definitions")
     parser.add_argument("--json", action="store_true", help="emit findings as JSON")

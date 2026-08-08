@@ -12,6 +12,7 @@ SRC_ROOT = PROJECT_ROOT / "src"
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
+from mcp_tool_lint.models import ANNOTATION_DEFAULTS
 from mcp_tool_lint.parser import load_tools, parse_tools_data
 
 
@@ -23,6 +24,7 @@ class ParseToolsDataTests(unittest.TestCase):
         self.assertEqual("get_user", tools[0].name)
         self.assertEqual("", tools[0].description)
         self.assertEqual({}, tools[0].annotations)
+        self.assertEqual(ANNOTATION_DEFAULTS, tools[0].effective_annotations)
 
     def test_parses_full_tool_and_ignores_unneeded_mcp_fields(self) -> None:
         tools = parse_tools_data(
@@ -55,6 +57,22 @@ class ParseToolsDataTests(unittest.TestCase):
             "openWorldHint": False,
         }.items():
             self.assertEqual(expected, tool.annotations[annotation])
+
+    def test_keeps_explicit_annotations_separate_from_effective_defaults(self) -> None:
+        tool = parse_tools_data(
+            [{"name": "get_user", "annotations": {"readOnlyHint": True}}]
+        )[0]
+
+        self.assertEqual({"readOnlyHint": True}, tool.annotations)
+        self.assertEqual(
+            {
+                "readOnlyHint": True,
+                "destructiveHint": True,
+                "idempotentHint": False,
+                "openWorldHint": True,
+            },
+            tool.effective_annotations,
+        )
 
     def test_parses_multiple_tools_in_input_order(self) -> None:
         tools = parse_tools_data(

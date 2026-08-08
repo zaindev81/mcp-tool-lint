@@ -47,19 +47,20 @@ mcp-tool-lint examples/tools.json --json
 ```
 
 The command exits with status `1` when it finds any `HIGH` findings, `0`
-otherwise, and `2` for invalid input or command usage.
+otherwise, and `2` for invalid input or command usage. The current keyword
+rules produce `WARN` review candidates, not `HIGH` findings, so a keyword match
+alone does not fail the command.
 Status symbols fall back to `x`, `!`, `i`, and `+` when stdout cannot encode
 the Unicode markers.
 
 Example findings include:
 
 ```text
-✗ delete_file
-  HIGH [MCP001]: Tool is marked read-only but appears to modify state. (evidence: delete)
-  HIGH [MCP002]: Tool is marked non-destructive but appears destructive. (evidence: delete)
+△ delete_file
+  WARN [MCP001]: Potential annotation mismatch: tool text may conflict with effective readOnlyHint=true. Review recommended. (evidence: description contains "Delete a local file")
 
 △ send_email
-  WARN [MCP003]: Tool is marked idempotent but may not be idempotent. (evidence: send)
+  WARN [MCP003]: Potential annotation mismatch: tool text may conflict with effective idempotentHint=true. Review recommended. (evidence: description contains "Send an email message")
 
 ✓ get_user
   OK
@@ -72,16 +73,26 @@ JSON output is an array of findings with stable rule IDs and evidence:
   {
     "tool": "delete_file",
     "rule_id": "MCP001",
-    "severity": "HIGH",
-    "message": "Tool is marked read-only but appears to modify state.",
-    "evidence": "delete"
+    "severity": "WARN",
+    "message": "Potential annotation mismatch: tool text may conflict with effective readOnlyHint=true. Review recommended.",
+    "evidence": "description contains \"Delete a local file\""
   }
 ]
 ```
 
 The supported annotations are `readOnlyHint`, `destructiveHint`,
-`idempotentHint`, and `openWorldHint`. Missing annotations are reported as
-informational findings, not vulnerabilities.
+`idempotentHint`, and `openWorldHint`. Explicit values are preserved separately
+from effective values. When omitted, the MCP defaults are:
+
+- `readOnlyHint=false`
+- `destructiveHint=true`
+- `idempotentHint=false`
+- `openWorldHint=true`
+
+MCP005 reports applicable omissions as annotation coverage information and
+includes the effective default; it does not describe them as vulnerabilities.
+`destructiveHint` and `idempotentHint` are evaluated and reported for coverage
+only when effective `readOnlyHint` is false.
 
 ## Tests
 
@@ -94,11 +105,12 @@ python -m unittest discover -s tests
 
 ## Current limitations
 
-- Rules use exact, case-insensitive keyword matching; they do not understand
-  intent, negation, synonyms, or domain context.
+- Rules use case-insensitive keyword matching with a few common inflections;
+  they do not understand intent, negation, synonyms, or domain context.
 - A matching word can be harmless in context, so findings may be false
   positives and require human review.
-- Unrecognized wording and inflected terms can produce false negatives.
+- Unrecognized wording, irregular inflections, and behavior omitted from the
+  tool text can produce false negatives.
 - The input must be a top-level JSON array; JSON-RPC `tools/list` envelopes,
   live MCP servers, and standard input are not supported.
 - This is an annotation consistency check, not a security scanner or proof that

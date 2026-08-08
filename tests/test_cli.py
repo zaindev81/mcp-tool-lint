@@ -64,7 +64,7 @@ class CliTests(unittest.TestCase):
                 check=False,
             )
 
-    def test_human_output_groups_high_warn_and_clean_tools(self) -> None:
+    def test_human_output_groups_review_candidates_and_clean_tools(self) -> None:
         result = self.run_cli(
             [
                 {
@@ -95,15 +95,16 @@ class CliTests(unittest.TestCase):
             ]
         )
 
-        self.assertEqual(1, result.returncode)
+        self.assertEqual(0, result.returncode)
         self.assertEqual("", result.stderr)
-        self.assertIn("✗ delete_file", result.stdout)
-        self.assertIn("HIGH", result.stdout)
+        self.assertIn("△ delete_file", result.stdout)
+        self.assertNotIn("HIGH", result.stdout)
         self.assertIn("MCP001", result.stdout)
-        self.assertIn("MCP002", result.stdout)
+        self.assertNotIn("MCP002", result.stdout)
         self.assertIn("△ send_email", result.stdout)
         self.assertIn("WARN", result.stdout)
         self.assertIn("MCP003", result.stdout)
+        self.assertIn("Review recommended", result.stdout)
         self.assertIn("✓ get_user", result.stdout)
         self.assertIn("OK", result.stdout)
 
@@ -140,14 +141,48 @@ class CliTests(unittest.TestCase):
             environment_overrides={"PYTHONIOENCODING": "ascii"},
         )
 
-        self.assertEqual(1, result.returncode)
+        self.assertEqual(0, result.returncode)
         self.assertEqual("", result.stderr)
-        self.assertIn("x delete_file", result.stdout)
+        self.assertIn("! delete_file", result.stdout)
         self.assertIn("! send_email", result.stdout)
         self.assertIn("i lookup_user", result.stdout)
         self.assertIn("+ get_user", result.stdout)
         for marker in ("✗", "△", "ⓘ", "✓"):
             self.assertNotIn(marker, result.stdout)
+        self.assertFalse(result.stdout.startswith("x "))
+        self.assertNotIn("\nx ", result.stdout)
+
+    def test_non_ascii_evidence_is_escaped_for_ascii_stdout(self) -> None:
+        data = [
+            {
+                "name": "delete_resume",
+                "description": "Delete résumé",
+                "annotations": {
+                    "readOnlyHint": True,
+                    "destructiveHint": True,
+                    "idempotentHint": False,
+                    "openWorldHint": True,
+                },
+            }
+        ]
+
+        for extra_arguments in ((), ("--json",)):
+            with self.subTest(arguments=extra_arguments):
+                result = self.run_cli(
+                    data,
+                    extra_arguments=extra_arguments,
+                    environment_overrides={"PYTHONIOENCODING": "ascii"},
+                )
+
+                self.assertEqual(0, result.returncode)
+                self.assertEqual("", result.stderr)
+                result.stdout.encode("ascii")
+                output = (
+                    json.loads(result.stdout)[0]["evidence"]
+                    if extra_arguments
+                    else result.stdout
+                )
+                self.assertIn(r"r\u00e9sum\u00e9", output)
 
     def test_json_output_has_required_shape_and_stable_order(self) -> None:
         result = self.run_cli(
@@ -166,11 +201,11 @@ class CliTests(unittest.TestCase):
             extra_arguments=("--json",),
         )
 
-        self.assertEqual(1, result.returncode)
+        self.assertEqual(0, result.returncode)
         self.assertEqual("", result.stderr)
         findings = json.loads(result.stdout)
         self.assertEqual(
-            ["MCP001", "MCP002", "MCP003", "MCP004"],
+            ["MCP001", "MCP004"],
             [finding["rule_id"] for finding in findings],
         )
         for finding in findings:

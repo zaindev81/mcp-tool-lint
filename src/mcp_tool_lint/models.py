@@ -6,28 +6,38 @@ from dataclasses import dataclass, field
 from typing import Literal
 
 
-SUPPORTED_HINTS = (
-    "readOnlyHint",
-    "destructiveHint",
-    "idempotentHint",
-    "openWorldHint",
-)
+ANNOTATION_DEFAULTS: dict[str, bool] = {
+    "readOnlyHint": False,
+    "destructiveHint": True,
+    "idempotentHint": False,
+    "openWorldHint": True,
+}
+SUPPORTED_HINTS = tuple(ANNOTATION_DEFAULTS)
 
 Severity = Literal["HIGH", "WARN", "INFO"]
 
 
 @dataclass(frozen=True, slots=True)
 class ToolDefinition:
-    """The subset of an MCP Tool definition needed by the linter."""
+    """Tool fields used by the linter; annotations contains explicit values only."""
 
     name: str
     description: str = ""
     annotations: dict[str, bool] = field(default_factory=dict)
 
+    @property
+    def effective_annotations(self) -> dict[str, bool]:
+        """Return explicit annotation values overlaid on the MCP defaults."""
+
+        return {
+            hint: self.annotations.get(hint, default)
+            for hint, default in ANNOTATION_DEFAULTS.items()
+        }
+
 
 @dataclass(frozen=True, slots=True)
 class Finding:
-    """A single suspicious or missing annotation reported by a rule."""
+    """A single review candidate or annotation coverage item."""
 
     tool: str
     rule_id: str
