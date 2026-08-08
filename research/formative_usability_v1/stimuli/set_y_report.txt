@@ -1,0 +1,44 @@
+MCP Tool annotation audit
+MCP schema: 2025-11-25
+Tools: 4
+Applicable annotation coverage: 4/12 (33.3%)
+Tools with manual review fields: 3
+Note: Manual review fields are omitted applicable annotations; they are not detected errors or vulnerabilities.
+
+Coverage by annotation:
+  readOnlyHint: 3/4 (75.0%)
+  destructiveHint: 0/2 (0.0%)
+  idempotentHint: 0/2 (0.0%)
+  openWorldHint: 1/4 (25.0%)
+
+API-get-users
+  Applicable coverage: 1/2 (50.0%)
+  readOnlyHint: true (explicit; applicable)
+  destructiveHint: true (MCP default; not applicable while effective readOnlyHint=true)
+  idempotentHint: false (MCP default; not applicable while effective readOnlyHint=true)
+  openWorldHint: true (MCP default; applicable; manual review field)
+  Manual review fields: openWorldHint
+
+dismiss_notification
+  Applicable coverage: 1/4 (25.0%)
+  readOnlyHint: false (explicit; applicable)
+  destructiveHint: true (MCP default; applicable; manual review field)
+  idempotentHint: false (MCP default; applicable; manual review field)
+  openWorldHint: true (MCP default; applicable; manual review field)
+  Manual review fields: destructiveHint, idempotentHint, openWorldHint
+
+read_file
+  Applicable coverage: 0/4 (0.0%)
+  readOnlyHint: false (MCP default; applicable; manual review field)
+  destructiveHint: true (MCP default; applicable; manual review field)
+  idempotentHint: false (MCP default; applicable; manual review field)
+  openWorldHint: true (MCP default; applicable; manual review field)
+  Manual review fields: readOnlyHint, destructiveHint, idempotentHint, openWorldHint
+
+get-sum
+  Applicable coverage: 2/2 (100.0%)
+  readOnlyHint: true (explicit; applicable)
+  destructiveHint: false (explicit; not applicable while effective readOnlyHint=true)
+  idempotentHint: true (explicit; not applicable while effective readOnlyHint=true)
+  openWorldHint: false (explicit; applicable)
+  Manual review fields: none

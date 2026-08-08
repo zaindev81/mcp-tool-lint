@@ -1,0 +1,31 @@
+[
+  {
+    "name": "actions_get",
+    "description": "Get details about specific GitHub Actions resources.\nUse this tool to get details about individual workflows, workflow runs, jobs, and artifacts by their unique IDs.\n",
+    "annotations": {
+      "readOnlyHint": true
+    }
+  },
+  {
+    "name": "create_branch",
+    "description": "Create a new branch in a GitHub repository",
+    "annotations": {
+      "readOnlyHint": false
+    }
+  },
+  {
+    "name": "search_files",
+    "description": "Recursively search for files and directories matching a pattern.",
+    "annotations": {}
+  },
+  {
+    "name": "echo",
+    "description": "Echoes back the input string",
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  }
+]

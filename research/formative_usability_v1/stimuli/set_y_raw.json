@@ -1,0 +1,31 @@
+[
+  {
+    "name": "API-get-users",
+    "description": "Notion | List all users\nError Responses:\n400: 400",
+    "annotations": {
+      "readOnlyHint": true
+    }
+  },
+  {
+    "name": "dismiss_notification",
+    "description": "Dismiss a notification by marking it as read or done",
+    "annotations": {
+      "readOnlyHint": false
+    }
+  },
+  {
+    "name": "read_file",
+    "description": "Read the complete contents of a file from the file system.",
+    "annotations": {}
+  },
+  {
+    "name": "get-sum",
+    "description": "Returns the sum of two numbers",
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  }
+]
